@@ -5,6 +5,7 @@ import { Ionicons } from "@expo/vector-icons";
 
 import LocationScreen from '../screens/LocationsScreen';
 import AddLocationScreen from '../screens/AddLocation';
+import MapScreen from '../screens/MapScreen';
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -33,7 +34,7 @@ function BottomTabs() {
       />
       <Tab.Screen 
         name="Map" 
-        component={AddLocationScreen} 
+        component={MapScreen} 
         options={{ 
           tabBarIcon: ({ color, size }) => (
             <Ionicons name="earth-sharp" size={size} color={color} />
