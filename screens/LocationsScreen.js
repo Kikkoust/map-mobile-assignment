@@ -1,17 +1,39 @@
-import React from 'react';
-import { View, Text, StyleSheet, Pressable } from 'react-native';
+import React, { useState } from 'react';
+import { View, Text, StyleSheet, Pressable, FlatList } from 'react-native';
 
 export default function LocationScreen({ navigation }) {
-  return (
-    <View>
-      <Pressable style={addLocStyle.button} onPress={() => navigation.navigate("Add location")}>
-        <Text style={addLocStyle.text}>Add new location</Text>
-      </Pressable>
+const [locations, setLocations] = useState([]);
 
-      
+const addNewLocation = (location) => {
+  setLocations((prevLocations) => [...prevLocations, location]);
+};
 
-    </View>
-  );
+
+return (
+  <View>
+
+    {/*LOCATIONS -> ADD LOCATION BUTTON*/}
+    <Pressable
+      style={addLocStyle.button}
+      onPress={() => navigation.navigate('Add location', { addNewLocation })}
+    >
+      <Text style={addLocStyle.text}>Add new location</Text>
+    </Pressable>
+
+        {/*ADDED LOCATION LIST*/}
+    <FlatList
+      data={locations}
+      renderItem={({ item }) => (
+        <View>
+          <Text>{item.name}</Text>
+          <Text>{item.description}</Text>
+        </View>
+      )}
+      keyExtractor={(item, index) => index.toString()}
+    />
+
+  </View>
+);
 }
 
 
