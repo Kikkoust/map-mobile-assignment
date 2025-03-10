@@ -1,19 +1,24 @@
-import React, { useState } from 'react';
-import { View, Text, StyleSheet, Pressable, FlatList } from 'react-native';
-import { AirbnbRating } from 'react-native-ratings';
+import React from 'react';
+import MapView, { PROVIDER_GOOGLE } from 'react-native-maps';
+import { StyleSheet, View } from 'react-native';
 
-export default function MapScreen() {
-
-
-
-
-
-return (
-  <View>
-    <Text>haHAA</Text>
-
-  </View>
-);
+export default function App() {
+  return (
+    <View style={styles.container}>
+      <MapView style={styles.map} provider={PROVIDER_GOOGLE} />
+    </View>
+  );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
+  map: {
+    width: '100%',
+    height: '100%',
+  },
+});
+
 
 
