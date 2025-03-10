@@ -12,13 +12,13 @@ const Tab = createBottomTabNavigator();
 //BOTTOM NAVIGATOR
 function BottomTabs() {
   return (
-    <Tab.Navigator screenOptions={{ headerShown: false }}>
+    <Tab.Navigator screenOptions={{ headerShown: true }}>
       <Tab.Screen 
         name="Locations" 
         component={LocationScreen} 
         options={{ 
           tabBarIcon: ({ color, size }) => (
-            <Ionicons name="" size={size} color={color} />
+            <Ionicons name="list-sharp" size={size} color={color} />
           ),
         }} 
       />
@@ -27,7 +27,7 @@ function BottomTabs() {
         component={AddLocationScreen} 
         options={{ 
           tabBarIcon: ({ color, size }) => (
-            <Ionicons name="" size={size} color={color} />
+            <Ionicons name="add-circle" size={size} color={color} />
           ),
         }} 
       />
@@ -36,7 +36,7 @@ function BottomTabs() {
         component={AddLocationScreen} 
         options={{ 
           tabBarIcon: ({ color, size }) => (
-            <Ionicons name="" size={size} color={color} />
+            <Ionicons name="earth-sharp" size={size} color={color} />
           ),
         }} 
       />
@@ -45,7 +45,7 @@ function BottomTabs() {
         component={AddLocationScreen} 
         options={{ 
           tabBarIcon: ({ color, size }) => (
-            <Ionicons name="" size={size} color={color} />
+            <Ionicons name="business" size={size} color={color} />
           ),
         }} 
       />
