@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { View, Text, StyleSheet, Pressable, TextInput } from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { AirbnbRating } from 'react-native-ratings';
 
 export default function AddLocation({ navigation, route }) {
@@ -7,12 +8,35 @@ export default function AddLocation({ navigation, route }) {
   const [description, setDescription] = useState('');
   const [rating, setRating] = useState(0);
 
-  const addLocation = () => {
-    console.log ("New location added", name, description, rating)
-    route.params.addNewLocation({ name, rating, description });
-    navigation.goBack();
+  const addLocation = async () => {
+    console.log("New location added", name, description, rating);
+    
+    const newLocation = { name, rating, description };
 
-  }
+    try {
+      const storedLocations = await AsyncStorage.getItem('locations');
+      const locations = storedLocations ? JSON.parse(storedLocations) : [];
+
+      //ADD NEW LOCATION TO LIST
+      locations.push(newLocation);
+
+      //SAVES LIST TO ASYNCSTORAGE
+      await AsyncStorage.setItem('locations', JSON.stringify(locations));
+
+      //EMPTY FIELDS
+      setName('');
+      setDescription('');
+      setRating(0);
+
+      //BACK TO LOCATIONSCREEN
+      if (route.params && route.params.refreshLocations) {
+        route.params.refreshLocations();
+      }
+      navigation.goBack();
+    } catch (error) {
+      console.error('Error saving location:', error);
+    }
+  };
 
   return (
     <View>

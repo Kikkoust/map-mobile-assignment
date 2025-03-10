@@ -1,27 +1,38 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, Pressable, FlatList } from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { AirbnbRating } from 'react-native-ratings';
 
 export default function LocationScreen({ navigation }) {
 const [locations, setLocations] = useState([]);
 
-const addNewLocation = (location) => {
-  setLocations((prevLocations) => [...prevLocations, location]);
+const refreshLocations = async () => {
+  try {
+    const storedLocations = await AsyncStorage.getItem('locations');
+    if (storedLocations) {
+      setLocations(JSON.parse(storedLocations));
+    }
+  } catch (error) {
+    console.error('Error retrieving locations:', error);
+  }
 };
 
 
+useEffect(() => {
+  refreshLocations();
+}, []);
+
 return (
   <View>
-
-    {/*LOCATIONS -> ADD LOCATION BUTTON*/}
+    {/* LOCATIONS -> ADD LOCATION BUTTON */}
     <Pressable
       style={addLocStyle.button}
-      onPress={() => navigation.navigate('Add location', { addNewLocation })}
+      onPress={() => navigation.navigate('Add location', { refreshLocations })}
     >
       <Text style={addLocStyle.text}>Add new location</Text>
     </Pressable>
 
-        {/*ADDED LOCATION LIST*/}
+    {/* ADDED LOCATION LIST */}
     <FlatList
       data={locations}
       renderItem={({ item }) => (
@@ -34,12 +45,10 @@ return (
             showRating={false}
             isDisabled
           />
-
         </View>
       )}
       keyExtractor={(item, index) => index.toString()}
     />
-
   </View>
 );
 }
