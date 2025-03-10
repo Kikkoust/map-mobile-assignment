@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { View, Text, StyleSheet, Pressable, FlatList } from 'react-native';
+import { AirbnbRating } from 'react-native-ratings';
 
 export default function LocationScreen({ navigation }) {
 const [locations, setLocations] = useState([]);
@@ -27,6 +28,13 @@ return (
         <View>
           <Text>{item.name}</Text>
           <Text>{item.description}</Text>
+          <AirbnbRating 
+            defaultRating={item.rating} 
+            size={16}
+            showRating={false}
+            isDisabled
+          />
+
         </View>
       )}
       keyExtractor={(item, index) => index.toString()}

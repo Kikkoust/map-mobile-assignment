@@ -1,13 +1,15 @@
 import React, { useState } from 'react';
 import { View, Text, StyleSheet, Pressable, TextInput } from 'react-native';
+import { AirbnbRating } from 'react-native-ratings';
 
 export default function AddLocation({ navigation, route }) {
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
+  const [rating, setRating] = useState(0);
 
   const addLocation = () => {
-    console.log ("New location added", name, description)
-    route.params.addNewLocation({ name, description });
+    console.log ("New location added", name, description, rating)
+    route.params.addNewLocation({ name, rating, description });
     navigation.goBack();
 
   }
@@ -29,8 +31,16 @@ export default function AddLocation({ navigation, route }) {
         keyboardType="default"
       />
 
+      <AirbnbRating
+        count={5}
+        defaultRating={rating}
+        size={20}
+        onFinishRating={(value) => setRating(value)}
+      />
+
       {/*BUTTON TO ADD LOCATION TO LOCATIONSSCREEN*/}
-      <Pressable style={addLocStyle.button} onPress= {addLocation}>
+      <Pressable 
+        style={addLocStyle.button} onPress= {addLocation}>
         <Text style={addLocStyle.text}>Add new location</Text>
       </Pressable>
 
