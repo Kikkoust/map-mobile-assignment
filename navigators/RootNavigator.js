@@ -10,7 +10,7 @@ import MapScreen from '../screens/MapScreen';
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
 
-//BOTTOM NAVIGATOR
+// BOTTOM NAVIGATOR
 function BottomTabs() {
   return (
     <Tab.Navigator screenOptions={{ headerShown: true }}>
@@ -32,6 +32,7 @@ function BottomTabs() {
           ),
         }} 
       />
+      {/* MapScreen as a tab */}
       <Tab.Screen 
         name="Map" 
         component={MapScreen} 
@@ -51,15 +52,14 @@ function BottomTabs() {
         }} 
       />
     </Tab.Navigator>
-    
   );
 }
 
-//STACK NAVIGATOR
+// STACK NAVIGATOR
 const RootNavigator = () => {
   return (
     <Stack.Navigator screenOptions={{ headerShown: false }}> 
-      <Stack.Screen name="Locations" component={BottomTabs} />
+      <Stack.Screen name="Tabs" component={BottomTabs} />
       <Stack.Screen name="Add location" component={AddLocationScreen} />
     </Stack.Navigator>
   );

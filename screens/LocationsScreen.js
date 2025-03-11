@@ -22,6 +22,23 @@ useEffect(() => {
   refreshLocations();
 }, []);
 
+const openMap = async (locationName) => {
+  try {
+    const response = await fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=${locationName}&key=`);
+    const data = await response.json();
+    const location = data.results[0]?.geometry.location;
+
+    if (location) {
+      navigation.navigate('Map', { latitude: location.lat, longitude: location.lng });
+    } else {
+      console.error('Location not found');
+    }
+  } catch (error) {
+    console.error('Error fetching location data:', error);
+  }
+};
+
+
 return (
   <View>
     {/* LOCATIONS -> ADD LOCATION BUTTON */}
@@ -46,6 +63,11 @@ return (
             showRating={false}
             isDisabled
           />
+          {/*OPEN MAP BUTTON*/}
+          <Pressable
+          onPress={() => openMap(item.name)}>
+            <Text>View on Map</Text>
+          </Pressable>
         </View>
       )}
       keyExtractor={(item, index) => index.toString()}
