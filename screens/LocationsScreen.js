@@ -34,11 +34,12 @@ return (
 
     {/* ADDED LOCATION LIST */}
     <FlatList
+      style={locationList.listContainer}
       data={locations}
       renderItem={({ item }) => (
-        <View>
-          <Text>{item.name}</Text>
-          <Text>{item.description}</Text>
+        <View style={locationList.list}>
+          <Text style={locationList.text}>{item.name}</Text>
+          <Text style={locationList.text}>{item.description}</Text>
           <AirbnbRating 
             defaultRating={item.rating} 
             size={16}
@@ -59,7 +60,7 @@ const addLocStyle = StyleSheet.create({
   button: {  
   alignItems: 'center',
   fontWeight: 'bold',
-  backgroundColor: 'purple',
+  backgroundColor: '#F6DC43',
   borderRadius: 18,
   padding: 10,
   margin: 10,
@@ -68,9 +69,34 @@ const addLocStyle = StyleSheet.create({
 
   text:{
     fontWeight:'bold',
-    color: 'white',
+    color: '#410445',
+    fontSize: 20,
   },
 
 
 });
 
+const locationList = StyleSheet.create({
+  listContainer:{
+    height: 460,
+    margin: 10,
+    alignContent: 'center',
+    backgroundColor: '#410445',
+    borderWidth: 2,
+    borderColor: '#F6DC43',
+  },
+
+  text:{
+    fontWeight: 'bold',
+    color: 'white',
+    fontSize: 16,
+  },
+
+  list:{
+    borderBottomWidth: 2,
+    borderBottomColor: '#F6DC43',
+    alignItems: 'center',
+    padding: 10,
+  },
+
+});
