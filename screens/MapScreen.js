@@ -4,6 +4,8 @@ import { StyleSheet, View } from 'react-native';
 
 export default function MapScreen({ route }) {
   const { latitude, longitude } = route.params || {};
+  
+  // DEFAULT COORDINATES IF LAT AND LONG ARE EMPTY
   const [region, setRegion] = useState({
     latitude: latitude || 60.192059,  //DEFAULT COORDINATES
     longitude: longitude || 24.945831,
