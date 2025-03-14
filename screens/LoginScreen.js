@@ -26,16 +26,17 @@ const LoginScreen = ({ navigation }) => {
     };
 
     return (
+   
         <KeyboardAvoidingView style={loginStyle.container}>
             <View>
-                <Text>Login plz</Text>
+                <Text style={loginStyle.buttonText}>Login or register</Text>
                 <TextInput
+                    style={loginStyle.input}
                     placeholder="Email"
                     onChangeText={text => setEmail(text)}
                     value={email}
                     keyboardType="email-address"
                     autoCapitalize="none"
-                    style={loginStyle.input}
                 />
                 <TextInput
                     value={password}
@@ -47,10 +48,11 @@ const LoginScreen = ({ navigation }) => {
             </View>
             <View style={loginStyle.buttonContainer}>
                 <Pressable onPress={handleLogin} style={loginStyle.button}>
-                    <Text>Login</Text>
+                <Text style={loginStyle.buttonText}>Login</Text>
                 </Pressable> 
+
                 <Pressable onPress={handleSignUp} style={loginStyle.button}>
-                    <Text>Register</Text>
+                <Text style={loginStyle.buttonText}>Register</Text>
                 </Pressable> 
             </View>
         </KeyboardAvoidingView>
@@ -73,7 +75,23 @@ const loginStyle = StyleSheet.create({
     },
 
     button:{
+        backgroundColor: '#F6DC43',
+        marginTop: 30,
+        width: 100,
+        alignItems: 'center',
+        borderRadius: 10,
 
+    },
+
+    buttonText:{
+        fontWeight: 'bold',
+        fontSize: 20,
+        color: '#410445'
+    },
+
+    input:{
+        borderWidth: 1,
+        marginTop: 16
     }
 }
 )
