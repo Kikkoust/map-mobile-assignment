@@ -7,6 +7,7 @@ import LoginScreen from "../screens/LoginScreen";
 import LocationScreen from "../screens/LocationsScreen";
 import AddLocationScreen from "../screens/AddLocation";
 import MapScreen from "../screens/MapScreen";
+import CapitalScreen from "../screens/CapitalsScreen";
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -44,7 +45,7 @@ function BottomTabs() {
       />
       <Tab.Screen 
         name="Capitals" 
-        component={AddLocationScreen} 
+        component={CapitalScreen} 
         options={{ 
           tabBarIcon: ({ color, size }) => (
             <Ionicons name="business" size={size} color={color} />
