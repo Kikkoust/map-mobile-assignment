@@ -64,7 +64,7 @@ export default function LocationScreen({ navigation }) {
       <View style={headerStyle.container}>
         <Text style={headerStyle.email}>{userEmail}</Text>
         <Pressable onPress={logout} style={headerStyle.logoutButton}>
-          <Text style={headerStyle.logoutText}>Logout</Text>
+        <Ionicons name="log-out-sharp" size={24} color="#410445" />
         </Pressable>
       </View>
 
