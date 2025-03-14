@@ -3,9 +3,10 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { Ionicons } from "@expo/vector-icons";
 
-import LocationScreen from '../screens/LocationsScreen';
-import AddLocationScreen from '../screens/AddLocation';
-import MapScreen from '../screens/MapScreen';
+import LoginScreen from "../screens/LoginScreen";
+import LocationScreen from "../screens/LocationsScreen";
+import AddLocationScreen from "../screens/AddLocation";
+import MapScreen from "../screens/MapScreen";
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -32,7 +33,6 @@ function BottomTabs() {
           ),
         }} 
       />
-      {/*MAP SCREEN TAB*/}
       <Tab.Screen 
         name="Map" 
         component={MapScreen} 
@@ -59,6 +59,7 @@ function BottomTabs() {
 const RootNavigator = () => {
   return (
     <Stack.Navigator screenOptions={{ headerShown: false }}> 
+      <Stack.Screen name="Login" component={LoginScreen} />  
       <Stack.Screen name="Tabs" component={BottomTabs} />
       <Stack.Screen name="Add location" component={AddLocationScreen} />
     </Stack.Navigator>
