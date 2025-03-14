@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, Pressable, FlatList } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { AirbnbRating } from 'react-native-ratings';
+import { Ionicons } from '@expo/vector-icons';
 
 export default function LocationScreen({ navigation }) {
 const [locations, setLocations] = useState([]);
@@ -10,7 +11,8 @@ const refreshLocations = async () => {
   try {
     const storedLocations = await AsyncStorage.getItem('locations');
     if (storedLocations) {
-      setLocations(JSON.parse(storedLocations));
+      const locationsArray = JSON.parse(storedLocations);
+      setLocations(locationsArray.reverse());
     }
   } catch (error) {
     console.error('Error retrieving locations:', error);
@@ -66,6 +68,7 @@ return (
           {/*OPEN MAP BUTTON*/}
           <Pressable
           onPress={() => openMap(item.name)}>
+            <Ionicons name="location-sharp" size={20} color="red" />
             <Text>View on Map</Text>
           </Pressable>
         </View>

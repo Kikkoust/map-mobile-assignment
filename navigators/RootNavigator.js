@@ -32,7 +32,7 @@ function BottomTabs() {
           ),
         }} 
       />
-      {/* MapScreen as a tab */}
+      {/*MAP SCREEN TAB*/}
       <Tab.Screen 
         name="Map" 
         component={MapScreen} 
