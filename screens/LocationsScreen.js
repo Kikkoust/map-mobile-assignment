@@ -3,16 +3,23 @@ import { View, Text, StyleSheet, Pressable, FlatList } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { AirbnbRating } from 'react-native-ratings';
 import { Ionicons } from '@expo/vector-icons';
+import { auth } from '../firebase/Config';
 
 export default function LocationScreen({ navigation }) {
 const [locations, setLocations] = useState([]);
 
 const refreshLocations = async () => {
   try {
-    const storedLocations = await AsyncStorage.getItem('locations');
-    if (storedLocations) {
-      const locationsArray = JSON.parse(storedLocations);
-      setLocations(locationsArray.reverse());
+    const user = auth.currentUser;
+
+    if (user) {
+      const userEmail = user.email;
+      const key = `locations_${userEmail}`; //USER KEY
+      const storedLocations = await AsyncStorage.getItem(key);
+      if (storedLocations) {
+        const locationsArray = JSON.parse(storedLocations);
+        setLocations(locationsArray.reverse());
+      }
     }
   } catch (error) {
     console.error('Error retrieving locations:', error);

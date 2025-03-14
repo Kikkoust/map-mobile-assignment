@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { View, Text, StyleSheet, Pressable, TextInput } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { AirbnbRating } from 'react-native-ratings';
+import { auth } from '../firebase/Config';
 
 export default function AddLocation({ navigation, route }) {
   const [name, setName] = useState('');
@@ -14,14 +15,24 @@ export default function AddLocation({ navigation, route }) {
     const newLocation = { name, rating, description };
 
     try {
-      const storedLocations = await AsyncStorage.getItem('locations');
+      const user = auth.currentUser;
+      if (!user) {
+        console.log("No user logged in");
+        return;
+      }
+
+      const userEmail = user.email;
+      const key = `locations_${userEmail}`;  //USER KEY
+
+      //LOAD SAVED LOCATIONS
+      const storedLocations = await AsyncStorage.getItem(key);
       const locations = storedLocations ? JSON.parse(storedLocations) : [];
 
-      //ADD NEW LOCATION TO LIST
+      //ADD LOCATION -> LIST
       locations.push(newLocation);
 
-      //SAVES LIST TO ASYNCSTORAGE
-      await AsyncStorage.setItem('locations', JSON.stringify(locations));
+      //SAVE LIST -> ASYNC
+      await AsyncStorage.setItem(key, JSON.stringify(locations));
 
       //EMPTY FIELDS
       setName('');
